@@ -3,7 +3,8 @@
 	left: 0;
 	width: 616px;
 	height: 100%;
-	overflow: scroll;
+	overflow-x: hidden;
+	overflow-y: auto;
 	transform: translate(-616px);
 	transition: transform 0.5s ease;
 }
@@ -16,6 +17,7 @@
 	display: flex;
 	flex-shrink: 0;
 	flex-direction: column;
+	gap: 48px;
 	box-sizing: border-box;
 	width: 616px;
 	height: auto;
@@ -25,8 +27,17 @@
 	border-right: 1px solid #000000;
 }
 
+.form > * {
+	margin: 0;
+}
+
 .bottomContainer {
 	display: flex;
 	justify-content: space-between;
 	margin-top: auto;
+	padding-top: 50px;
+}
+
+.sepWrap {
+	margin: 0;
 }
