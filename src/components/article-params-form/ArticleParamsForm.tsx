@@ -51,7 +51,10 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 		const handleClickOutside = (event: MouseEvent) => {
 			if (!isSidebarOpen) return;
 
-			if (wrapperRef.current && !wrapperRef.current.contains(event.target as Node)) {
+			if (
+				wrapperRef.current &&
+				!wrapperRef.current.contains(event.target as Node)
+			) {
 				onToggleSidebar();
 			}
 		};
@@ -83,14 +86,18 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 	return (
 		<div ref={wrapperRef}>
 			<ArrowButton isOpen={isSidebarOpen} onClick={onToggleSidebar} />
-			<aside className={clsx(styles.container, isSidebarOpen && styles.container_open)}>
+			<aside
+				className={clsx(
+					styles.container,
+					isSidebarOpen && styles.container_open
+				)}>
 				<form className={styles.form} onSubmit={handleApply}>
-				<Text as="h2" size={31} weight={800} uppercase>
-				Задайте параметры
-				</Text>
+					<Text as='h2' size={31} weight={800} uppercase>
+						Задайте параметры
+					</Text>
 					{/* Шрифт */}
 					<Select
-						title="Шрифт"
+						title='Шрифт'
 						selected={formState.fontFamilyOption}
 						options={fontFamilyOptions}
 						onChange={setOption('fontFamilyOption')}
@@ -98,8 +105,8 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 
 					{/* Размер шрифта */}
 					<RadioGroup
-						title="Размер шрифта"
-						name="fontSize"
+						title='Размер шрифта'
+						name='fontSize'
 						selected={formState.fontSizeOption}
 						options={fontSizeOptions}
 						onChange={setOption('fontSizeOption')}
@@ -107,19 +114,19 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 
 					{/* Цвет шрифта */}
 					<Select
-						title="Цвет шрифта"
+						title='Цвет шрифта'
 						selected={formState.fontColor}
 						options={fontColors}
 						onChange={setOption('fontColor')}
 					/>
 
 					<div className={styles.sepWrap}>
-					<Separator />
+						<Separator />
 					</div>
 
 					{/* Цвет фона */}
 					<Select
-						title="Цвет фона"
+						title='Цвет фона'
 						selected={formState.backgroundColor}
 						options={backgroundColors}
 						onChange={setOption('backgroundColor')}
@@ -127,15 +134,20 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 
 					{/* Ширина контента */}
 					<Select
-						title="Ширина контента"
+						title='Ширина контента'
 						selected={formState.contentWidth}
 						options={contentWidthArr}
 						onChange={setOption('contentWidth')}
 					/>
 
 					<div className={styles.bottomContainer}>
-						<Button title="Сбросить" htmlType="button" type="clear" onClick={handleReset} />
-						<Button title="Применить" htmlType="submit" type="apply" />
+						<Button
+							title='Сбросить'
+							htmlType='button'
+							type='clear'
+							onClick={handleReset}
+						/>
+						<Button title='Применить' htmlType='submit' type='apply' />
 					</div>
 				</form>
 			</aside>
