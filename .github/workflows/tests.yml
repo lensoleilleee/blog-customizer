@@ -16,15 +16,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Playwright browsers (pinned)
-        run: npx playwright@1.58.2 install --with-deps chromium
-
       - name: Check if the repository is private
         if: ${{github.event.repository.private}}
         run: exit 1
 
       - name: Get testing lib
         run: set -eu && git clone https://github.com/Yandex-Practicum/tests-blog-customizer.git /tmp/tests-blog-customizer
+
+      - name: Install Playwright browsers (pinned)
+        run: npx playwright@1.58.2 install --with-deps chromium
 
       - name: Run tests
         run: bash /tmp/tests-blog-customizer/run.sh
