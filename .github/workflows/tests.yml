@@ -16,8 +16,8 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Playwright browsers
-        run: npx playwright install --with-deps chromium
+      - name: Install Playwright browsers (pinned)
+        run: npx playwright@1.58.2 install --with-deps chromium
 
       - name: Check if the repository is private
         if: ${{github.event.repository.private}}
