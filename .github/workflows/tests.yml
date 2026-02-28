@@ -9,6 +9,7 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v3
 
@@ -17,22 +18,24 @@ jobs:
           node-version: 20
 
       - name: Check if the repository is private
-        if: ${{github.event.repository.private}}
+        if: ${{ github.event.repository.private }}
         run: exit 1
 
       - name: Get testing lib
         run: set -eu && git clone https://github.com/Yandex-Practicum/tests-blog-customizer.git /tmp/tests-blog-customizer
 
-      - name: Install Playwright chromium (pinned)
-        run: npx playwright@1.58.2 install --with-deps chromium
-
-      - name: DEBUG marker
+      - name: Install Playwright chromium (pinned 1.58.2)
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: /home/runner/.cache/ms-playwright
         run: |
-          echo "MARKER: tests.yml UPDATED"
+          npx playwright@1.58.2 install --with-deps chromium
+          echo "Installed browsers:"
           ls -la /home/runner/.cache/ms-playwright || true
           find /home/runner/.cache/ms-playwright -maxdepth 2 -type d -name "chromium-1117*" || true
 
       - name: Run tests
+        env:
+          PLAYWRIGHT_BROWSERS_PATH: /home/runner/.cache/ms-playwright
         run: bash /tmp/tests-blog-customizer/run.sh
 
       - uses: actions/upload-artifact@v4
