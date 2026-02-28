@@ -23,6 +23,15 @@ jobs:
       - name: Get testing lib
         run: set -eu && git clone https://github.com/Yandex-Practicum/tests-blog-customizer.git /tmp/tests-blog-customizer
 
+      - name: Install Playwright chromium (pinned)
+        run: npx playwright@1.58.2 install --with-deps chromium
+
+      - name: DEBUG marker
+        run: |
+          echo "MARKER: tests.yml UPDATED"
+          ls -la /home/runner/.cache/ms-playwright || true
+          find /home/runner/.cache/ms-playwright -maxdepth 2 -type d -name "chromium-1117*" || true
+
       - name: Run tests
         run: bash /tmp/tests-blog-customizer/run.sh
 
